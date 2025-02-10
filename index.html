@@ -8,15 +8,54 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sono:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: white;
+            --card-bg: #1e1e1e;
+            --highlight: #ffcc00;
+            --button-bg: #ffcc00;
+            --button-hover: #e6b800;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f0f0f0;
+            --text-color: #121212;
+            --card-bg: white;
+            --highlight: #ff9900;
+            --button-bg: #ff9900;
+            --button-hover: #e68a00;
+        }
+
         body {
             font-family: "Sono", sans-serif;
-            background-color: #121212;
-            color: white;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             margin: 0;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .toggle-theme {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--button-bg);
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--bg-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-theme:hover {
+            background: var(--button-hover);
         }
 
         .pricing-container {
@@ -28,13 +67,13 @@
         }
 
         .pricing-plan {
-            background: #1e1e1e;
+            background: var(--card-bg);
             padding: 30px;
             border-radius: 10px;
             text-align: center;
             width: 300px;
             box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
 
         .pricing-plan:hover {
@@ -50,7 +89,7 @@
         .plan-price {
             font-size: 20px;
             font-weight: 700;
-            color: #ffcc00;
+            color: var(--highlight);
             margin-bottom: 15px;
         }
 
@@ -65,19 +104,19 @@
         }
 
         .plan-button {
-            background: #ffcc00;
+            background: var(--button-bg);
             border: none;
             padding: 10px 20px;
             font-size: 16px;
             font-weight: 700;
-            color: #121212;
+            color: var(--bg-color);
             border-radius: 5px;
             cursor: pointer;
             transition: background 0.3s ease;
         }
 
         .plan-button:hover {
-            background: #e6b800;
+            background: var(--button-hover);
         }
 
         @media (max-width: 900px) {
@@ -89,6 +128,8 @@
     </style>
 </head>
 <body>
+    <button class="toggle-theme">Modo Claro</button>
+
     <div class="pricing-container">
         <div class="pricing-plan">
             <div class="plan-title">Basic</div>
@@ -121,5 +162,24 @@
             <button class="plan-button">Sign Up</button>
         </div>
     </div>
+
+    <script>
+        const themeButton = document.querySelector(".toggle-theme");
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute("data-theme");
+            const newTheme = currentTheme === "light" ? "dark" : "light";
+            document.documentElement.setAttribute("data-theme", newTheme);
+            localStorage.setItem("theme", newTheme);
+            themeButton.textContent = newTheme === "light" ? "Modo Oscuro" : "Modo Claro";
+        }
+
+        themeButton.addEventListener("click", toggleTheme);
+
+        // Aplicar el tema guardado
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+        themeButton.textContent = savedTheme === "light" ? "Modo Oscuro" : "Modo Claro";
+    </script>
 </body>
 </html>
