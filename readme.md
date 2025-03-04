@@ -1,4 +1,6 @@
 # Flexspot Pricing Table
+[View Live Page](https://sandrodevx.github.io/Flexspot-Pricing-Table/)
+
 
 Flexspot Pricing Table is a responsive and modern pricing table built using **HTML**, **CSS**, and **JavaScript**. It features a clean design, dark/light theme toggle, and hover effects for an enhanced user experience. Perfect for showcasing subscription plans or pricing tiers on your website.
 
